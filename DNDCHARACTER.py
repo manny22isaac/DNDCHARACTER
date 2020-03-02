@@ -1,51 +1,54 @@
 import pprint
 import random
+import sys
 
 
 print("""Welcome to Simple DND character creator!
-      Please enter the amount of players in your game:""")
+      Please enter the amount of players in your game.(UP TO 6) :""")
+
 players = int(input())
 
-#create a small program that will iterate however many players there are
-#
+characterinfo = {'name':[], 'race':[], 'age':[], 'bio':[],
+                 'alignment':[], 'classLevel':[]}
+
+name = []
+race = []
+age = []
+bio = []
+alignment = []
+classLevel =[]
 
 
-#bug instead of printing out iterating a single character at a time
-#the program prints out every single characters stats.
-for i in range(int(players)):
-    name = input("What is your character's name? ")
-    race = input("What is the race of %s ? " %(name))
-    age = input("How old is %s? " %(name))
-    bio = input("Provide a brief description of who %s is. " %(name))
-    alignment = input("State %s\'s alignment. " %(name))
-    classLevel = input("What is %s\'s class/level? " %(name))
+if players <= 6:
+    for i in range(int(players)):
+        name = input("What is your character's name? ")
+        characterinfo.setdefault('name', []).append(name)
+        race = input("What is the race of %s ? " %(name))
+        characterinfo.setdefault('race', []).append(race)
+        age = input("How old is %s? " %(name))
+        characterinfo.setdefault('age', []).append(age)
+        bio = input("Provide a brief description of who %s is. " %(name))
+        characterinfo.setdefault('bio', []).append(bio)
+        alignment = input("State %s\'s alignment. " %(name))
+        characterinfo.setdefault('alignment', []).append(alignment)
+        classLevel = input("What is %s\'s class/level? " %(name))
+        characterinfo.setdefault('classLevel', []).append(classLevel)
+
+elif players > 6 or players <= 0:
+    print("Sorry, but you do not meet the required amount of players.")
+    sys.exit()
 
 
 class DND():
     #this method stores the info into variables
-    def __init__(self, name, race, age, bio, players, alignment, classLevel):
-        self.name = name
-        self.race = race
-        self.age = age
-        self.bio = bio
+    def __init__(self, characterinfo, players):
+        self.characterinfo = characterinfo
         self.players = players
-        self.alignment = alignment
-        self.classLevel = classLevel
-
     #this function is supposed to append the users' input into a list
     def playerstats(self):
-        playerInfo = {}
-        playerInfo.setdefault('name', []).append(self.name)
-        playerInfo.setdefault('race', []).append(self.race)
-        playerInfo.setdefault('age', []).append(self.age)
-        playerInfo.setdefault('bio', []).append(self.bio)
-        playerInfo.setdefault('players', []).append(self.players)
-        playerInfo.setdefault('alignment', []).append(self.alignment)
-        playerInfo.setdefault('classLevel', []).append(self.classLevel)
+        playerInfo = characterinfo
         print(playerInfo)
 
 
-#these two lines store in the information into the __init__ method
-#then into a dictionary
-Character_1 = DND(name, race, age, bio, players, alignment, classLevel)
-Character_1.playerstats()
+Characters = DND(characterinfo, players)
+Characters.playerstats()
