@@ -1,4 +1,4 @@
-# DNDCHARACTER
+# DND Dungeon Master
 
 ## Character Info Program
 This program will help you get started with your DND game. 
@@ -11,4 +11,3 @@ Example:
 characterinfo = {'name':[], 'race':[], 'age':[], 'bio':[],
                  'alignment':[], 'classLevel':[]} 
 ```
-
